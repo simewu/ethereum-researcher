@@ -1,0 +1,79 @@
+https://arvanaghi.com/blog/testing-smart-contracts-on-a-private-blockchain-with-Geth/
+
+
+
+
+https://arvanaghi.com/blog/how-to-set-up-a-private-ethereum-blockchain-using-geth/
+
+./build/bin/geth account new
+	Give the account a password
+	It'll create an account to ~/.ethereum/keystore
+
+./build/bin/geth account list
+	Account #0: {e5b1d3c993d6f7eed2aba899244f261799f2b099} keystore:///home/ubuntu1/.ethereum/keystore/UTC--2022-02-04T09-30-21.552342704Z--e5b1d3c993d6f7eed2aba899244f261799f2b099
+
+	From this, we want /home/ubuntu1/.ethereum/keystore/UTC--2022-02-04T09-30-21.552342704Z--e5b1d3c993d6f7eed2aba899244f261799f2b099
+
+
+Create genesis.json in your current directory, add these contents:
+Insert YOUR_WALLET_ADDRESS below, it grants you the full market cap:
+
+// genesis.json
+{
+ "config": {
+   "chainID": 1234,
+   "homesteadBlock": 0,
+   "eip155Block": 0,
+   "eip158Block": 0
+ },
+ "alloc": {
+    "0xYOUR_WALLET_ADDRESS": {
+      "balance": "100000000000000000000000000000"
+    }
+ },
+ "difficulty": "0x4000",
+ "gasLimit": "0xffffffff",
+ "nonce": "0x0000000000000000",
+ "coinbase": "0x0000000000000000000000000000000000000000",
+ "mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+ "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+ "extraData": "0x123458db4e347b1234537c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+ "timestamp": "0x00"
+}
+
+./build/bin/geth --datadir "~/Desktop/geth_node_1" init genesis.json
+./build/bin/geth --datadir "~/Desktop/geth_node_2" init genesis.json
+	Without datadir it would store the blockchain in ~/.ethereum
+
+
+tempdontusethisyet ./build/bin/geth --datadir "~/Desktop/geth_node_1" --keystore "" --networkid 1234 --port 11111 --nodiscover console
+
+./build/bin/geth --datadir "~/Desktop/geth_node_1" --networkid 1234 --port 11111 --nodiscover console
+	Launch the console!
+	The networkid must match the "chainID" from the genesis.json
+	Using nodiscover means it'll be offline and isolated from the network
+
+./build/bin/geth --datadir "~/Desktop/geth_node_2" --networkid 1234 --port 11112 --nodiscover console
+
+
+
+
+
+From the first node, let's transfer over our rich account:
+cp ~/.ethereum/keystore/UTC--<rest of wallet file's name> ~/Desktop/LocalNode1/keystore/
+
+In the first node's console:
+personal.listwallets
+
+personal.listAccounts
+
+
+
+
+
+
+
+
+
+
+Now let's connect the peers:
