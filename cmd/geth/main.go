@@ -118,6 +118,7 @@ var (
 		utils.CacheSnapshotFlag,
 		utils.CacheNoPrefetchFlag,
 		utils.CachePreimagesFlag,
+		utils.FDLimitFlag,
 		utils.ListenPortFlag,
 		utils.MaxPeersFlag,
 		utils.MaxPendingPeersFlag,
@@ -157,7 +158,6 @@ var (
 		utils.GpoIgnoreGasPriceFlag,
 		utils.MinerNotifyFullFlag,
 		configFileFlag,
-		utils.CatalystFlag,
 	}
 
 	rpcFlags = []cli.Flag{
@@ -165,6 +165,9 @@ var (
 		utils.HTTPListenAddrFlag,
 		utils.HTTPPortFlag,
 		utils.HTTPCORSDomainFlag,
+		utils.AuthHostFlag,
+		utils.AuthPortFlag,
+		utils.JWTSecretFlag,
 		utils.HTTPVirtualHostsFlag,
 		utils.GraphQLEnabledFlag,
 		utils.GraphQLCORSDomainFlag,
