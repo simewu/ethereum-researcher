@@ -6,15 +6,20 @@
 # 	-ropsten	Run a light node in the Ropsten testnet
 #	-local		Run a local/offline node [still under development]
 
-import os
-import sys
 import getopt
+import os
+import re
+import sys
+import time
 
 global gethCmdHeader
+gethCmdHeader = './build/bin/geth'
 
-gethCmdHeader = './build/bin/geth --syncmode "light"'
+global portNumber
+portNumber = 1210
 
-
+global accountAddress, accountKeystorePath
+accountAddress = ''
 
 # Send commands to the terminal
 def terminal(cmd):
@@ -48,37 +53,133 @@ def geth(cmd):
 # 		genesisFile.write('')
 # 	return path
 
+# Returns address, keystorePath, or None if no address exists
+def getAccount(datadir):
+	try:
+		response = terminal(f'./build/bin/geth -datadir="{datadir}" account list')
+		match = re.match(r'Account #0: \{([0-9a-fA-F]+)\} keystore://(.*)', response)
+		address = match.group(1)
+		keystorePath = match.group(2).strip()
+		return address, keystorePath
+	except:
+		return None, None
+
+
+def createLocalGethDirectory(datadir):
+	global accountAddress, accountKeystorePath
+
+	if not os.path.exists(datadir):
+		print('Creating datadir directory "datadir"...')
+		os.makedirs(datadir)
+
+	accountAddress, accountKeystorePath = getAccount(datadir)
+	if accountAddress is None:
+		print('Account does not exist, creating account...')
+		passwordPath = os.path.expanduser(os.path.join('~', 'tempPassword.txt'))
+		# Just make the default password "" for simplicity, security is not important for testing environments:
+		terminal(f'echo "" > {passwordPath}')
+		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		terminal(f'rm -rf {passwordPath}')
+		accountAddress, accountKeystorePath = getAccount(datadir)
+
+	# Check if it worked...
+	if accountAddress is None:
+		print('Attempted to create an account, but failed.')
+		print('Terminating program.')
+		sys.exit()
+
+	print('Account address:', accountAddress)
+
+	genesisPath = os.path.join(datadir, 'genesis.json')
+	genesisFile = open(genesisPath, 'w')
+	genesisFile.write('''{
+	"config": {
+		"chainID": 1234,
+		"homesteadBlock": 0,
+		"eip150Block": 0,
+		"eip155Block": 0,
+		"eip158Block": 0
+	},
+	"alloc": {
+		"0x''' + accountAddress + '''": {
+			"balance": "100000000000000000000000000000"
+		}
+	},
+	"difficulty": "0x4000",
+	"gasLimit": "0xffffffff",
+	"nonce": "0x0000000000000000",
+	"coinbase": "0x0000000000000000000000000000000000000000",
+	"mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+	"parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+	"extraData": "0x123458db4e347b1234537c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+	"timestamp": "0x00"
+}''')
+	genesisFile.close()
+	print('Genesis written! Initializing...')
+	terminal(f'./build/bin/geth -datadir="{datadir}" init "{genesisPath}"')
+
 
 def main(argv):
 	global gethCmdHeader
+	global portNumber
+	global accountAddress, accountKeystorePath
 
 	contractFileName = ''
 
 	try:
-		opts, args = getopt.getopt(argv, 'rl:c:', ['local=', 'contract='])
-		assert len(opts) > 0, 'Invalid number of arguments'
-	except:
+		opts, args = getopt.getopt(argv, 'rlc:p:', ['ropsten', 'local', 'contract', 'port'])
+		assert len(opts) >= 0, 'Invalid number of arguments'
+	except Exception as e:
+		print('ERROR:', e)
+		print()
 		print ('python3 run.py [arguments]')
 		print('\t-r, --ropsten\t\t\tUse the ropsten testnet')
-		print('\t-l, --local X\t\t\tUse local blockchain (index=X)')
+		print('\t-l, --local\t\t\tUse local blockchain')
 		print('\t-c, --contract <path_to.sol>\tExecute a solidity contract file')
+		print('\t-p, --port 1210\t\tSet the RPC port / geth instance number')
 		sys.exit(2)
 
-	# Loop through arguments
+	# Default to local blockchain instance
+	if len(opts) == 0:
+		opts.append(('--local', ''))
+
+
+	# Round 1: loop through arguments
 	for opt, arg in opts:
+		if opt in ('-p', '--port'):
+			portNumber = arg
+
+	# portNumber has been updated, update the geth command
+	gethCmdHeader += f' -http --http.port {portNumber}'
+
+	# Round 2: loop through arguments
+	for opt, arg in opts:
+
 		if opt in ('-r', '--ropsten'):
+			gethCmdHeader += ' --syncmode "light"'
 			gethCmdHeader += ' --ropsten'
 		
 		elif opt in ('-l', '--local'):
-			print('STILL UNDER DEVELOPMENT')
-			sys.exit()
+			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'local-geth-{portNumber}-node'))
+			if not os.path.exists(os.path.join(datadir, 'genesis.json')):
+				print(f'Creating directory "{datadir}"...')
+				createLocalGethDirectory(datadir)
+
+				accountAddress, accountKeystorePath = getAccount(datadir)
+
+			gethCmdHeader += f' -datadir "{datadir}"'
 
 		elif opt in ('-c', '--contract'):
 			contractFileName = arg
 
 	if contractFileName != '':
 		print('Executing ' + contractFileName)
+		print(geth('attach geth.ipc --exec "eth.blockNumber"'))
+		#print(geth('attach --exec "eth.blockNumber"'))
 	else:
+		print('Starting console...')
+		print(gethCmdHeader)
+		time.sleep(5)
 		geth('console')
 # print(cmd)
 # terminal(cmd)
