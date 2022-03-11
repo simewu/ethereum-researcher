@@ -16,6 +16,8 @@
 
 package vm
 
+//Read https://ethereum.org/en/developers/docs/evm/ for more info on EVM #CyberSecLab
+
 import (
 	"math/big"
 	"sync/atomic"
