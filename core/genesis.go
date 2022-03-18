@@ -207,9 +207,6 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, genesis *Genesis, override
 	if overrideArrowGlacier != nil {
 		newcfg.ArrowGlacierBlock = overrideArrowGlacier
 	}
-	if overrideTerminalTotalDifficulty != nil {
-		newcfg.TerminalTotalDifficulty = overrideTerminalTotalDifficulty
-	}
 	if err := newcfg.CheckConfigForkOrder(); err != nil {
 		return newcfg, common.Hash{}, err
 	}
@@ -218,6 +215,10 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, genesis *Genesis, override
 		log.Warn("Found genesis block without chain config")
 		rawdb.WriteChainConfig(db, stored, newcfg)
 		return newcfg, stored, nil
+	}
+
+	if overrideTerminalTotalDifficulty != nil {
+		storedcfg.TerminalTotalDifficulty = overrideTerminalTotalDifficulty
 	}
 	// Special case: don't change the existing config of a non-mainnet chain if no new
 	// config is supplied. These chains would get AllProtocolChanges (and a compat error)
@@ -253,6 +254,8 @@ func (g *Genesis) configOrDefault(ghash common.Hash) *params.ChainConfig {
 		return params.RinkebyChainConfig
 	case ghash == params.GoerliGenesisHash:
 		return params.GoerliChainConfig
+	case ghash == params.KilnGenesisHash:
+		return DefaultKilnGenesisBlock().Config
 	default:
 		return params.AllEthashProtocolChanges
 	}
@@ -416,6 +419,15 @@ func DefaultSepoliaGenesisBlock() *Genesis {
 		Timestamp:  1633267481,
 		Alloc:      decodePrealloc(sepoliaAllocData),
 	}
+}
+
+func DefaultKilnGenesisBlock() *Genesis {
+	g := new(Genesis)
+	reader := strings.NewReader(KilnAllocData)
+	if err := json.NewDecoder(reader).Decode(g); err != nil {
+		panic(err)
+	}
+	return g
 }
 
 // DeveloperGenesisBlock returns the 'geth --dev' genesis block.
