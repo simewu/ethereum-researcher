@@ -8,15 +8,27 @@
 
 import getopt
 import os
+import psutil    
 import re
+import subprocess
 import sys
 import time
+import webbrowser
+
+
+# GETH COMMANDS:
+#	https://geth.ethereum.org/docs/interface/command-line-options
+#	txpool			Show unconfirmed transactions
+#	miner.start		Start mining
+#	miner.stop		Stop mining
+#	--jspath 'home directory/javascript'
+#	loadScript('mineWhenNeeded.js')
 
 global gethCmdHeader
 gethCmdHeader = './build/bin/geth'
 
 global portNumber
-portNumber = 1210
+portNumber = 8545
 
 global accountAddress, accountKeystorePath
 accountAddress = ''
@@ -25,6 +37,9 @@ accountAddress = ''
 def terminal(cmd):
 	print(cmd)
 	return os.popen(cmd).read()
+
+def terminal_newwindow(cmd):
+	subprocess.call(f'{cmd}', shell=True)
 
 # # Run a geth command
 # def geth(cmd, nodeDataDir=''):
@@ -35,6 +50,10 @@ def terminal(cmd):
 def geth(cmd):
 	global gethCmdHeader
 	return terminal(f'{gethCmdHeader} {cmd}')
+
+def geth_newwindow(cmd):
+	global gethCmdHeader
+	return terminal_newwindow(f'{gethCmdHeader} {cmd}')
 
 # def getAccount():
 # 	output = geth('account list')
@@ -136,7 +155,7 @@ def main(argv):
 		print('\t-r, --ropsten\t\t\tUse the ropsten testnet')
 		print('\t-l, --local\t\t\tUse local blockchain')
 		print('\t-c, --contract <path_to.sol>\tExecute a solidity contract file')
-		print('\t-p, --port 1210\t\tSet the RPC port / geth instance number')
+		print('\t-p, --port 8545\t\tSet the RPC port / geth instance number')
 		sys.exit(2)
 
 	# Default to local blockchain instance
@@ -165,32 +184,38 @@ def main(argv):
 				print(f'Creating directory "{datadir}"...')
 				createLocalGethDirectory(datadir)
 
-				accountAddress, accountKeystorePath = getAccount(datadir)
-
 			gethCmdHeader += f' -datadir "{datadir}"'
 
 		elif opt in ('-c', '--contract'):
 			contractFileName = arg
+
+	accountAddress, accountKeystorePath = getAccount(datadir)
 
 	if contractFileName != '':
 		print('Executing ' + contractFileName)
 		print(geth('attach geth.ipc --exec "eth.blockNumber"'))
 		#print(geth('attach --exec "eth.blockNumber"'))
 	else:
+
 		print('Starting console...')
-		print(gethCmdHeader)
-		time.sleep(5)
-		geth('console')
-# print(cmd)
-# terminal(cmd)
-# sys.exit()
+		print()
+		print(f'Address: {accountAddress}')
+		print('Hosted at:')
+		print()
+		print(f'\t\t127.0.0.1:{portNumber}')
+		print()
+		time.sleep(3)
 
-# nodeIndex = input('Enter a node index: ')
-# assert nodeIndex is int, 'NodeIndex is not an integer'
-# assert nodeIndex > 0, 'NodeIndex must be a positive integer'
-# nodeDataDir = getOrGenDataDir(nodeIndex)
 
-# geth('account list')
+		if 'firefox' not in (p.name() for p in psutil.process_iter()):
+			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
+
+
+		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> --dev console
+		geth_newwindow(' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --dev console')
+
+
+
 
 
 if __name__ == '__main__':
