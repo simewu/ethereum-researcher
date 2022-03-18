@@ -151,6 +151,7 @@ def main(argv):
 
 	# portNumber has been updated, update the geth command
 	gethCmdHeader += f' -http --http.port {portNumber}'
+	gethCmdHeader += f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug'
 
 	# Round 2: loop through arguments
 	for opt, arg in opts:
