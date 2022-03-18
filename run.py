@@ -55,6 +55,14 @@ def geth_newwindow(cmd):
 	global gethCmdHeader
 	return terminal_newwindow(f'{gethCmdHeader} {cmd}')
 
+
+# def isGethRunning():
+# 	return len(terminal('ps faux | grep geth').strip()) > 0
+
+# def stopGethNode():
+# 	terminal('pkill -f geth')
+
+
 # def getAccount():
 # 	output = geth('account list')
 # 	if output == '':
@@ -162,6 +170,13 @@ def main(argv):
 	if len(opts) == 0:
 		opts.append(('--local', ''))
 
+	# if isGethRunning():
+	# 	print('Stopping current geth instance...')
+	# 	stopGethNode()
+	# 	time.sleep(1)
+	# 	if isGethRunning():
+	# 		print('Stopping geth failed! Please make sure geth is not running.')
+	# 		sys.exit()
 
 	# Round 1: loop through arguments
 	for opt, arg in opts:
