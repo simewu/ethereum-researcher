@@ -207,6 +207,7 @@ def main(argv):
 
 	accountAddress, accountKeystorePath = getAccount(datadir)
 
+
 	if contractFileName != '':
 		print('Executing ' + contractFileName)
 		print(geth('attach geth.ipc --exec "eth.blockNumber"'))
@@ -223,12 +224,13 @@ def main(argv):
 		time.sleep(3)
 
 
+
 		if 'firefox' not in (p.name() for p in psutil.process_iter()):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
 
 		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> console
-		geth_newwindow(' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug console')
+		geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug console')
 
 
 
