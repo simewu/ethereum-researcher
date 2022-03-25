@@ -227,8 +227,8 @@ def main(argv):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
 
-		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> --dev console
-		geth_newwindow(' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --dev console')
+		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> console
+		geth_newwindow(' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug console')
 
 
 
