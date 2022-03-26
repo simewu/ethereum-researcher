@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# Upon startup, type into the console:
+# 		loadScript('javascript/mineWhenNeeded.js')
+
+
 # python3 run.py [ARGS]
 
 # ARGS:
@@ -39,7 +43,8 @@ def terminal(cmd):
 	return os.popen(cmd).read()
 
 def terminal_newwindow(cmd):
-	subprocess.call(f'{cmd}', shell=True)
+	terminal('gnome-terminal -t "Custom Geth Console" -- ' + cmd)
+	# subprocess.call(f'{cmd}', shell=True)
 
 # # Run a geth command
 # def geth(cmd, nodeDataDir=''):
@@ -230,7 +235,19 @@ def main(argv):
 
 
 		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> console
+		# geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug --exec \'loadScript("javascript/mineWhenNeeded.js")\' console')
 		geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug console')
+
+
+
+		#geth(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug --exec \'loadScript("javascript/mineWhenNeeded.js")\'')
+		
+		#time.sleep(5)
+		#print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+		#print('Running the javascript!!!!!!!!!!')
+		#geth(' --exec \'loadScript("javascript/mineWhenNeeded.js")\' attach')
+
+
 
 
 
