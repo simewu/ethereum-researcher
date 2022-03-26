@@ -37,6 +37,8 @@ portNumber = 8545
 global accountAddress, accountKeystorePath
 accountAddress = ''
 
+global passwordPath
+
 # Send commands to the terminal
 def terminal(cmd):
 	print(cmd)
@@ -98,7 +100,7 @@ def getAccount(datadir):
 
 
 def createLocalGethDirectory(datadir):
-	global accountAddress, accountKeystorePath
+	global accountAddress, accountKeystorePath, passwordPath
 
 	if not os.path.exists(datadir):
 		print('Creating datadir directory "datadir"...')
@@ -107,11 +109,11 @@ def createLocalGethDirectory(datadir):
 	accountAddress, accountKeystorePath = getAccount(datadir)
 	if accountAddress is None:
 		print('Account does not exist, creating account...')
-		passwordPath = os.path.expanduser(os.path.join('~', 'tempPassword.txt'))
+		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
 		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
-		terminal(f'rm -rf {passwordPath}')
+		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
 	# Check if it worked...
@@ -158,6 +160,7 @@ def main(argv):
 	global gethCmdHeader
 	global portNumber
 	global accountAddress, accountKeystorePath
+	global passwordPath
 
 	contractFileName = ''
 
@@ -204,6 +207,7 @@ def main(argv):
 		
 		elif opt in ('-l', '--local'):
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'local-geth-{portNumber}-node'))
+			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(os.path.join(datadir, 'genesis.json')):
 				print(f'Creating directory "{datadir}"...')
 				createLocalGethDirectory(datadir)
@@ -229,17 +233,15 @@ def main(argv):
 		print()
 		print(f'\t\t127.0.0.1:{portNumber}')
 		print()
-		time.sleep(3)
-
-
+		time.sleep(1)
 
 		if 'firefox' not in (p.name() for p in psutil.process_iter()):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
 
-		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> console
-		# geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug --exec \'loadScript("javascript/mineWhenNeeded.js")\' console')
-		geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password="" --vmdebug --preload "javascript/mineWhenNeeded.js" console')
+		geth(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --vmdebug --preload "javascript/mineWhenNeeded.js" console')
+
+		#geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --vmdebug --preload "javascript/mineWhenNeeded.js" console')
 
 
 
