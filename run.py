@@ -128,6 +128,9 @@ def createLocalGethDirectory(datadir):
 	"config": {
 		"chainID": 1234,
 		"homesteadBlock": 0,
+		"byzantiumBlock": 0,
+		"constantinopleBlock": 0,
+		"eip145Block": 0,
 		"eip150Block": 0,
 		"eip155Block": 0,
 		"eip158Block": 0
@@ -137,8 +140,8 @@ def createLocalGethDirectory(datadir):
 			"balance": "100000000000000000000000000000"
 		}
 	},
-	"difficulty": "0x4000",
-	"gasLimit": "0xffffffff",
+	"difficulty": "0x400",
+	"gasLimit": "0x8000000",
 	"nonce": "0x0000000000000000",
 	"coinbase": "0x0000000000000000000000000000000000000000",
 	"mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -236,20 +239,7 @@ def main(argv):
 
 		# geth --http --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --vmdebug --datadir <path/to/local/folder/for/test/chain> console
 		# geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug --exec \'loadScript("javascript/mineWhenNeeded.js")\' console')
-		geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug console')
-
-
-
-		#geth(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password "" --vmdebug --exec \'loadScript("javascript/mineWhenNeeded.js")\'')
-		
-		#time.sleep(5)
-		#print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-		#print('Running the javascript!!!!!!!!!!')
-		#geth(' --exec \'loadScript("javascript/mineWhenNeeded.js")\' attach')
-
-
-
-
+		geth_newwindow(f' --http.corsdomain="https://remix.ethereum.org" --http.api web3,eth,debug,personal,net --allow-insecure-unlock --unlock {accountAddress} --password="" --vmdebug --preload "javascript/mineWhenNeeded.js" console')
 
 
 
