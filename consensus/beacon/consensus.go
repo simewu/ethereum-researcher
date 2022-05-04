@@ -21,14 +21,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/consensus"
+	"github.com/simewu/ethereum-researcher/consensus/misc"
+	"github.com/simewu/ethereum-researcher/core/state"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/params"
+	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/simewu/ethereum-researcher/trie"
 )
 
 // Proof-of-stake protocol constants.

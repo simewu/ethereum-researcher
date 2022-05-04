@@ -28,17 +28,21 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/simewu/ethereum-researcher/core"
+	"github.com/simewu/ethereum-researcher/core/rawdb"
+	"github.com/simewu/ethereum-researcher/core/state"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/core/vm"
+	"github.com/simewu/ethereum-researcher/internal/ethapi"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/simewu/ethereum-researcher/trie"
+
+	researcher "github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
+	//researcher "../core/vm" // Cybersecurity lab: Import VM interface
 )
 
 // PublicEthereumAPI provides an API to access Ethereum full node-related
@@ -325,6 +329,11 @@ type BadBlockArgs struct {
 	RLP   string                 `json:"rlp"`
 }
 
+// Cybersecurity Lab: Defining BytecodeInfoArg
+type BytecodeInfoArg struct {
+	opcode string `json:"opcode"`
+}
+
 // GetBadBlocks returns a list of the last 'bad blocks' that the client has seen on the network
 // and returns them as a JSON list of block-hashes
 func (api *PrivateDebugAPI) GetBadBlocks(ctx context.Context) ([]*BadBlockArgs, error) {
@@ -606,4 +615,45 @@ func (api *PrivateDebugAPI) GetAccessibleState(from, to rpc.BlockNumber) (uint64
 		}
 	}
 	return 0, fmt.Errorf("No state found")
+}
+
+// Cybersecurity Lab: Defining getBytecodeInfo
+// GetBytecodeInfo returns a list of processing times for each bytecode instruction
+func (api *PrivateDebugAPI) GetBytecodeInfo(ctx context.Context) ([]*BytecodeInfoArg, error) {
+	// var (
+	// 	err     error
+	// 	blocks  = rawdb.ReadAllBadBlocks(api.eth.chainDb)
+	// 	results = make([]*BadBlockArgs, 0, len(blocks))
+	// )
+	// for _, block := range blocks {
+	// 	var (
+	// 		blockRlp  string
+	// 		blockJSON map[string]interface{}
+	// 	)
+	// 	if rlpBytes, err := rlp.EncodeToBytes(block); err != nil {
+	// 		blockRlp = err.Error() // Hacky, but hey, it works
+	// 	} else {
+	// 		blockRlp = fmt.Sprintf("0x%x", rlpBytes)
+	// 	}
+	// 	if blockJSON, err = ethapi.RPCMarshalBlock(block, true, true, api.eth.APIBackend.ChainConfig()); err != nil {
+	// 		blockJSON = map[string]interface{}{"error": err.Error()}
+	// 	}
+	// 	results = append(results, &BadBlockArgs{
+	// 		Hash:  block.Hash(),
+	// 		RLP:   blockRlp,
+	// 		Block: blockJSON,
+	// 	})
+	// }
+
+	var (
+		results []*BytecodeInfoArg
+	)
+	var a vm.OpCode = researcher.ADD
+	if a == researcher.CHAINID {
+
+	}
+	results = append(results, &BytecodeInfoArg{
+		opcode: researcher.getBytecodeInfoStats(),
+	})
+	return results, nil
 }

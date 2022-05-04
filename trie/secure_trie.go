@@ -19,10 +19,10 @@ package trie
 import (
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/rlp"
 )
 
 // SecureTrie wraps a trie with key hashing. In a secure trie, all

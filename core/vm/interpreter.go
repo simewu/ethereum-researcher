@@ -19,9 +19,9 @@ package vm
 import (
 	"hash"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/common/math"
+	"github.com/simewu/ethereum-researcher/log"
 )
 
 // Config are the configuration options for the Interpreter

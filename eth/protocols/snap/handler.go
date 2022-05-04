@@ -21,17 +21,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/light"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/core"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/light"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/metrics"
+	"github.com/simewu/ethereum-researcher/p2p"
+	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/simewu/ethereum-researcher/p2p/enr"
+	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/simewu/ethereum-researcher/trie"
 )
 
 const (

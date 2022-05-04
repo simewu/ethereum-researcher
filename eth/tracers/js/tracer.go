@@ -28,13 +28,13 @@ import (
 	"unicode"
 	"unsafe"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	tracers2 "github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/eth/tracers/js/internal/tracers"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/simewu/ethereum-researcher/core/vm"
+	"github.com/simewu/ethereum-researcher/crypto"
+	tracers2 "github.com/simewu/ethereum-researcher/eth/tracers"
+	"github.com/simewu/ethereum-researcher/eth/tracers/js/internal/tracers"
+	"github.com/simewu/ethereum-researcher/log"
 	"gopkg.in/olebedev/go-duktape.v3"
 )
 

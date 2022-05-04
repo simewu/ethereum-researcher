@@ -1,4 +1,4 @@
-module github.com/ethereum/go-ethereum
+module github.com/simewu/ethereum-researcher
 
 go 1.15
 

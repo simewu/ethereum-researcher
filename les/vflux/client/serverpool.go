@@ -24,15 +24,15 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/les/utils"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/simewu/ethereum-researcher/common/mclock"
+	"github.com/simewu/ethereum-researcher/ethdb"
+	"github.com/simewu/ethereum-researcher/les/utils"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/metrics"
+	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/simewu/ethereum-researcher/p2p/enr"
+	"github.com/simewu/ethereum-researcher/p2p/nodestate"
+	"github.com/simewu/ethereum-researcher/rlp"
 )
 
 const (

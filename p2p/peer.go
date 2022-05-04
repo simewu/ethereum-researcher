@@ -25,13 +25,13 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/simewu/ethereum-researcher/common/mclock"
+	"github.com/simewu/ethereum-researcher/event"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/metrics"
+	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/simewu/ethereum-researcher/p2p/enr"
+	"github.com/simewu/ethereum-researcher/rlp"
 )
 
 var (

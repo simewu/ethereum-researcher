@@ -26,22 +26,22 @@ import (
 	"testing"
 	"unicode"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/tests"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/simewu/ethereum-researcher/common/math"
+	"github.com/simewu/ethereum-researcher/core"
+	"github.com/simewu/ethereum-researcher/core/rawdb"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/core/vm"
+	"github.com/simewu/ethereum-researcher/crypto"
+	"github.com/simewu/ethereum-researcher/eth/tracers"
+	"github.com/simewu/ethereum-researcher/params"
+	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/simewu/ethereum-researcher/tests"
 
 	// Force-load native and js pacakges, to trigger registration
-	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
-	_ "github.com/ethereum/go-ethereum/eth/tracers/native"
+	_ "github.com/simewu/ethereum-researcher/eth/tracers/js"
+	_ "github.com/simewu/ethereum-researcher/eth/tracers/native"
 )
 
 // To generate a new callTracer test, copy paste the makeTest method below into

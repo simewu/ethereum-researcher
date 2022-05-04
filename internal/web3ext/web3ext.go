@@ -471,6 +471,12 @@ web3._extend({
 			params: 2,
 			inputFormatter:[web3._extend.formatters.inputBlockNumberFormatter, web3._extend.formatters.inputBlockNumberFormatter],
 		}),
+		// Cybersecurity Lab: Registering research api
+		new web3._extend.Method({
+			name: 'getBytecodeInfo',
+			call: 'debug_getBytecodeInfo',
+			params: 0,
+		}),
 	],
 	properties: []
 });

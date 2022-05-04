@@ -24,16 +24,16 @@ import (
 	"math/big"
 	"strconv"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/eth/filters"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/simewu/ethereum-researcher"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/simewu/ethereum-researcher/common/math"
+	"github.com/simewu/ethereum-researcher/consensus/misc"
+	"github.com/simewu/ethereum-researcher/core/state"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/eth/filters"
+	"github.com/simewu/ethereum-researcher/internal/ethapi"
+	"github.com/simewu/ethereum-researcher/rpc"
 )
 
 var (

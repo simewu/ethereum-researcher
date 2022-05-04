@@ -25,9 +25,9 @@ import (
 	"time"
 
 	"github.com/VictoriaMetrics/fastcache"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/core/rawdb"
+	"github.com/simewu/ethereum-researcher/rlp"
 )
 
 // randomHash generates a random blob of data and returns it as a hash.

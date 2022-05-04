@@ -22,12 +22,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/cmd/devp2p/internal/v4test"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/simewu/ethereum-researcher/cmd/devp2p/internal/v4test"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/crypto"
+	"github.com/simewu/ethereum-researcher/p2p/discover"
+	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/simewu/ethereum-researcher/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

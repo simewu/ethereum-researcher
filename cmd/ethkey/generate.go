@@ -23,10 +23,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/google/uuid"
+	"github.com/simewu/ethereum-researcher/accounts/keystore"
+	"github.com/simewu/ethereum-researcher/cmd/utils"
+	"github.com/simewu/ethereum-researcher/crypto"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -24,21 +24,21 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/asm"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/simewu/ethereum-researcher/accounts/abi"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/consensus"
+	"github.com/simewu/ethereum-researcher/core"
+	"github.com/simewu/ethereum-researcher/core/asm"
+	"github.com/simewu/ethereum-researcher/core/rawdb"
+	"github.com/simewu/ethereum-researcher/core/state"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/core/vm"
+	"github.com/simewu/ethereum-researcher/eth/tracers"
+	"github.com/simewu/ethereum-researcher/eth/tracers/logger"
+	"github.com/simewu/ethereum-researcher/params"
 
 	// force-load js tracers to trigger registration
-	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
+	_ "github.com/simewu/ethereum-researcher/eth/tracers/js"
 )
 
 func TestDefaults(t *testing.T) {
@@ -626,7 +626,7 @@ func TestEip2929Cases(t *testing.T) {
 
 // TestColdAccountAccessCost test that the cold account access cost is reported
 // correctly
-// see: https://github.com/ethereum/go-ethereum/issues/22649
+// see: https://github.com/simewu/ethereum-researcher/issues/22649
 func TestColdAccountAccessCost(t *testing.T) {
 	for i, tc := range []struct {
 		code []byte

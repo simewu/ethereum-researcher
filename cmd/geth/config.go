@@ -27,19 +27,19 @@ import (
 
 	"gopkg.in/urfave/cli.v1"
 
-	"github.com/ethereum/go-ethereum/accounts/external"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/accounts/scwallet"
-	"github.com/ethereum/go-ethereum/accounts/usbwallet"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/params"
 	"github.com/naoina/toml"
+	"github.com/simewu/ethereum-researcher/accounts/external"
+	"github.com/simewu/ethereum-researcher/accounts/keystore"
+	"github.com/simewu/ethereum-researcher/accounts/scwallet"
+	"github.com/simewu/ethereum-researcher/accounts/usbwallet"
+	"github.com/simewu/ethereum-researcher/cmd/utils"
+	"github.com/simewu/ethereum-researcher/core/rawdb"
+	"github.com/simewu/ethereum-researcher/eth/ethconfig"
+	"github.com/simewu/ethereum-researcher/internal/ethapi"
+	"github.com/simewu/ethereum-researcher/log"
+	"github.com/simewu/ethereum-researcher/metrics"
+	"github.com/simewu/ethereum-researcher/node"
+	"github.com/simewu/ethereum-researcher/params"
 )
 
 var (

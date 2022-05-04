@@ -26,15 +26,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/internal/jsre"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/node"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/consensus/ethash"
+	"github.com/simewu/ethereum-researcher/console/prompt"
+	"github.com/simewu/ethereum-researcher/core"
+	"github.com/simewu/ethereum-researcher/eth"
+	"github.com/simewu/ethereum-researcher/eth/ethconfig"
+	"github.com/simewu/ethereum-researcher/internal/jsre"
+	"github.com/simewu/ethereum-researcher/miner"
+	"github.com/simewu/ethereum-researcher/node"
 )
 
 const (

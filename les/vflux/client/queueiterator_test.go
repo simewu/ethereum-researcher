@@ -20,10 +20,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
+	"github.com/simewu/ethereum-researcher/common/mclock"
+	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/simewu/ethereum-researcher/p2p/enr"
+	"github.com/simewu/ethereum-researcher/p2p/nodestate"
 )
 
 func testNode(i int) *enode.Node {

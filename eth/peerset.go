@@ -21,10 +21,10 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/eth/protocols/eth"
-	"github.com/ethereum/go-ethereum/eth/protocols/snap"
-	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/eth/protocols/eth"
+	"github.com/simewu/ethereum-researcher/eth/protocols/snap"
+	"github.com/simewu/ethereum-researcher/p2p"
 )
 
 var (

@@ -19,12 +19,16 @@ package vm
 import (
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
 	"github.com/holiman/uint256"
+	"github.com/simewu/ethereum-researcher/common"
+	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/simewu/ethereum-researcher/params"
 	"golang.org/x/crypto/sha3"
 )
+
+func getBytecodeInfoStats() string {
+	return "42"
+}
 
 func opAdd(pc *uint64, interpreter *EVMInterpreter, scope *ScopeContext) ([]byte, error) {
 	x, y := scope.Stack.pop(), scope.Stack.peek()

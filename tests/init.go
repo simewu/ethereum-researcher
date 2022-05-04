@@ -21,7 +21,7 @@ import (
 	"math/big"
 	"sort"
 
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/simewu/ethereum-researcher/params"
 )
 
 // Forks table defines supported forks and their chain config.
