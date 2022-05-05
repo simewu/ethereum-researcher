@@ -98,7 +98,6 @@ def getAccount(datadir):
 	except:
 		return None, None
 
-
 def createLocalGethDirectory(datadir):
 	global accountAddress, accountKeystorePath, passwordPath
 
@@ -156,24 +155,49 @@ def createLocalGethDirectory(datadir):
 	terminal(f'./build/bin/geth -datadir="{datadir}" init "{genesisPath}"')
 
 
+def createInternetGethDirectory(datadir):
+	global accountAddress, accountKeystorePath, passwordPath
+
+	if not os.path.exists(datadir):
+		print('Creating datadir directory "datadir"...')
+		os.makedirs(datadir)
+
+	accountAddress, accountKeystorePath = getAccount(datadir)
+	if accountAddress is None:
+		print('Account does not exist, creating account...')
+		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
+		# Just make the default password "" for simplicity, security is not important for testing environments:
+		terminal(f'echo "" > {passwordPath}')
+		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		#terminal(f'rm -rf {passwordPath}')
+		accountAddress, accountKeystorePath = getAccount(datadir)
+
+	# Check if it worked...
+	if accountAddress is None:
+		print('Attempted to create an account, but failed.')
+		print('Terminating program.')
+		sys.exit()
+
+	print('Account address:', accountAddress)
+	terminal(f'./build/bin/geth -datadir="{datadir}" init')
+
+
 def main(argv):
 	global gethCmdHeader
 	global portNumber
 	global accountAddress, accountKeystorePath
 	global passwordPath
 
-	contractFileName = ''
-
 	try:
-		opts, args = getopt.getopt(argv, 'rlc:p:', ['ropsten', 'local', 'contract', 'port'])
+		opts, args = getopt.getopt(argv, 'mrlp:', ['mainnet', 'ropsten', 'local', 'port'])
 		assert len(opts) >= 0, 'Invalid number of arguments'
 	except Exception as e:
 		print('ERROR:', e)
 		print()
 		print ('python3 run.py [arguments]')
+		print('\t-m, --mainnet\t\t\tUse the mainnet')
 		print('\t-r, --ropsten\t\t\tUse the ropsten testnet')
 		print('\t-l, --local\t\t\tUse local blockchain')
-		print('\t-c, --contract <path_to.sol>\tExecute a solidity contract file')
 		print('\t-p, --port 8545\t\tSet the RPC port / geth instance number')
 		sys.exit(2)
 
@@ -206,9 +230,25 @@ def main(argv):
 	# Round 2: loop through arguments
 	for opt, arg in opts:
 
-		if opt in ('-r', '--ropsten'):
+		if opt in ('-m', '--mainnet'):
+			gethCmdHeader += ' --syncmode "full"'
+			gethCmdHeader += ' --mainnet'
+			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'mainnet-geth-{portNumber}-node'))
+			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
+			if not os.path.exists(datadir):
+				print('Creating datadir directory "datadir"...')
+				os.makedirs(datadir)
+				createInternetGethDirectory(datadir)
+
+		elif opt in ('-r', '--ropsten'):
 			gethCmdHeader += ' --syncmode "light"'
 			gethCmdHeader += ' --ropsten'
+			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'ropsten-geth-{portNumber}-node'))
+			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
+			if not os.path.exists(datadir):
+				print('Creating datadir directory "datadir"...')
+				os.makedirs(datadir)
+				createInternetGethDirectory(datadir)
 		
 		elif opt in ('-l', '--local'):
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'local-geth-{portNumber}-node'))
@@ -219,33 +259,30 @@ def main(argv):
 
 			gethCmdHeader += f' -datadir "{datadir}"'
 
-		elif opt in ('-c', '--contract'):
-			contractFileName = arg
 
-	accountAddress, accountKeystorePath = getAccount(datadir)
-
-
-	if contractFileName != '':
-		print('Executing ' + contractFileName)
-		print(geth('attach geth.ipc --exec "eth.blockNumber"'))
-		#print(geth('attach --exec "eth.blockNumber"'))
-	else:
-
-		print('Starting console...')
-		print()
+	print('Starting console...')
+	print()
+	if opt in ('-l', '--local'):
+		accountAddress, accountKeystorePath = getAccount(datadir)
 		print(f'Address: {accountAddress}')
 		print('Hosted at:')
 		print()
 		print(f'\t\t127.0.0.1:{portNumber}')
 		print()
 		time.sleep(1)
-
 		if 'firefox' not in (p.name() for p in psutil.process_iter()):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
 		geth_newwindow(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
 		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
-		print('\nIf this errored, make sure that another geth window is not running.')
+	
+	else: # Internet node (ropsten or mainnet)
+		geth_newwindow(f'--vmdebug console')
+		#geth(f'--vmdebug console')
+
+
+
+	print('\nIf this errored, make sure that another geth window is not running.')
 
 if __name__ == '__main__':
 	main(sys.argv[1:])
