@@ -195,7 +195,7 @@ def main(argv):
 			portNumber = arg
 
 	# portNumber has been updated, update the geth command
-	gethCmdHeader += f' --http --http.port {portNumber+1} --http.api web3,eth,debug,personal,net'
+	gethCmdHeader += f' --http --http.port {portNumber} --http.api web3,eth,debug,personal,net'
 	#gethCmdHeader += f' --ws --ws.port {portNumber} --ws.api web3,eth,debug,personal,net'
 	gethCmdHeader += f' --http.corsdomain="https://remix.ethereum.org"'
 	#gethCmdHeader += f' --http.corsdomain="*"'
@@ -243,9 +243,8 @@ def main(argv):
 		if 'firefox' not in (p.name() for p in psutil.process_iter()):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
-		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
 		geth_newwindow(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
-
+		print('\nIf this errored, make sure that another geth window is not running.')
 
 if __name__ == '__main__':
 	main(sys.argv[1:])

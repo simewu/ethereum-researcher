@@ -34,7 +34,6 @@ import (
 	"github.com/simewu/ethereum-researcher/core/rawdb"
 	"github.com/simewu/ethereum-researcher/core/state"
 	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
 	"github.com/simewu/ethereum-researcher/internal/ethapi"
 	"github.com/simewu/ethereum-researcher/log"
 	"github.com/simewu/ethereum-researcher/rlp"
@@ -42,7 +41,9 @@ import (
 	"github.com/simewu/ethereum-researcher/trie"
 
 	researcher "github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
+	//researcher "github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
 	//researcher "../core/vm" // Cybersecurity lab: Import VM interface
+	//"github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
 )
 
 // PublicEthereumAPI provides an API to access Ethereum full node-related
@@ -327,11 +328,6 @@ type BadBlockArgs struct {
 	Hash  common.Hash            `json:"hash"`
 	Block map[string]interface{} `json:"block"`
 	RLP   string                 `json:"rlp"`
-}
-
-// Cybersecurity Lab: Defining BytecodeInfoArg
-type BytecodeInfoArg struct {
-	opcode string `json:"opcode"`
 }
 
 // GetBadBlocks returns a list of the last 'bad blocks' that the client has seen on the network
@@ -619,7 +615,7 @@ func (api *PrivateDebugAPI) GetAccessibleState(from, to rpc.BlockNumber) (uint64
 
 // Cybersecurity Lab: Defining getBytecodeInfo
 // GetBytecodeInfo returns a list of processing times for each bytecode instruction
-func (api *PrivateDebugAPI) GetBytecodeInfo(ctx context.Context) ([]*BytecodeInfoArg, error) {
+func (api *PrivateDebugAPI) GetBytecodeInfo(ctx context.Context) (string, error) {
 	// var (
 	// 	err     error
 	// 	blocks  = rawdb.ReadAllBadBlocks(api.eth.chainDb)
@@ -645,15 +641,24 @@ func (api *PrivateDebugAPI) GetBytecodeInfo(ctx context.Context) ([]*BytecodeInf
 	// 	})
 	// }
 
-	var (
-		results []*BytecodeInfoArg
-	)
-	var a vm.OpCode = researcher.ADD
-	if a == researcher.CHAINID {
+	// var (
+	// 	results []*string
+	// )
 
+	//var value researcher.Export
+
+	// Temp: Maintain linter import
+	var a researcher.OpCode = researcher.CHAINID
+	if a == researcher.CHAINID {
 	}
-	results = append(results, &BytecodeInfoArg{
-		opcode: researcher.getBytecodeInfoStats(),
-	})
-	return results, nil
+
+	// Cybersecurity lab: getBytecodeInfoStats defined in /core/vm/instructions.go
+	//results = append(results, "Hello")
+	//results = append(results, " worlkd1!")
+
+	var export researcher.Export
+	//fmt.Printf("export: %v\n%T", exportBytecodeInfoStats, exportBytecodeInfoStats)
+	return export.GetBytecodeInfoStats(), nil
+	//return export.getBytecodeInfoStats(), nil
+	//return "OKAY", nil
 }

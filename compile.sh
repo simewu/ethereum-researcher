@@ -4,3 +4,7 @@ echo "Then re-install, and append \"export PATH=\$PATH:/usr/local/go/bin\" to \"
 
 
 make all
+
+echo "\n\nCompilation finished, starting...\n"
+
+python3 run.py
