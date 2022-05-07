@@ -19,6 +19,12 @@ import sys
 import time
 import webbrowser
 
+datadirDirectory = os.path.expanduser(os.path.join('~', 'Desktop'))
+
+# Scan for a "Blockchains" directory on linux systems, use it if it exists
+if os.path.exists(os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]):
+	datadirDirectory = os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]
+
 
 # GETH COMMANDS:
 #	https://geth.ethereum.org/docs/interface/command-line-options
@@ -233,7 +239,7 @@ def main(argv):
 		if opt in ('-m', '--mainnet'):
 			gethCmdHeader += ' --syncmode "full"'
 			gethCmdHeader += ' --mainnet'
-			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'mainnet-geth-{portNumber}-node'))
+			datadir = os.path.expanduser(os.path.join(datadirDirectory, f'mainnet-geth-{portNumber}-node'))
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(datadir):
 				print('Creating datadir directory "datadir"...')
