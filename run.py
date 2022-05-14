@@ -264,7 +264,7 @@ def main(argv):
 				print(f'Creating directory "{datadir}"...')
 				createLocalGethDirectory(datadir)
 
-			gethCmdHeader += f' ---datadir "{datadir}"'
+			gethCmdHeader += f' --datadir "{datadir}"'
 
 
 	print('Starting console...')
