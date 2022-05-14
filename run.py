@@ -25,7 +25,6 @@ datadirDirectory = os.path.expanduser(os.path.join('~', 'Desktop'))
 if os.path.exists(os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]):
 	datadirDirectory = os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]
 
-print(f'Datadir={datadirDirectory}')
 
 # GETH COMMANDS:
 #	https://geth.ethereum.org/docs/interface/command-line-options
@@ -241,24 +240,35 @@ def main(argv):
 			gethCmdHeader += ' --syncmode "full"'
 			gethCmdHeader += ' --mainnet'
 			datadir = os.path.expanduser(os.path.join(datadirDirectory, f'mainnet-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(datadir):
 				print('Creating datadir directory "datadir"...')
 				os.makedirs(datadir)
 				createInternetGethDirectory(datadir)
 
+			gethCmdHeader += f' --datadir "{datadir}"'
+			ipcPath = os.path.expanduser(os.path.join('~', 'Desktop', 'mainnet-geth-' + str(portNumber) + '-node-geth.ipc'))
+			gethCmdHeader += f' --ipcpath "{ipcPath}"'
+
 		elif opt in ('-r', '--ropsten'):
 			gethCmdHeader += ' --syncmode "light"'
 			gethCmdHeader += ' --ropsten'
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'ropsten-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(datadir):
 				print('Creating datadir directory "datadir"...')
 				os.makedirs(datadir)
 				createInternetGethDirectory(datadir)
+
+			gethCmdHeader += f' --datadir "{datadir}"'
+			ipcPath = os.path.expanduser(os.path.join('~', 'Desktop', 'ropsten-geth-' + str(portNumber) + '-node-geth.ipc'))
+			gethCmdHeader += f' --ipcpath "{ipcPath}"'
 		
 		elif opt in ('-l', '--local'):
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'local-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(os.path.join(datadir, 'genesis.json')):
 				print(f'Creating directory "{datadir}"...')
@@ -284,8 +294,8 @@ def main(argv):
 		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
 	
 	else: # Internet node (ropsten or mainnet)
-		geth_newwindow(f'--vmdebug console')
-		#geth(f'--vmdebug console')
+		#geth_newwindow(f'--vmdebug console')
+		geth(f'--vmdebug console')
 
 
 
