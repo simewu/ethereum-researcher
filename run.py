@@ -25,6 +25,7 @@ datadirDirectory = os.path.expanduser(os.path.join('~', 'Desktop'))
 if os.path.exists(os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]):
 	datadirDirectory = os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]
 
+print(f'Datadir={datadirDirectory}')
 
 # GETH COMMANDS:
 #	https://geth.ethereum.org/docs/interface/command-line-options
@@ -59,7 +60,7 @@ def terminal_newwindow(cmd):
 # 	if nodeDataDir == '':
 # 		return terminal(f'./build/bin/geth {cmd}')
 # 	else:
-# 		return terminal(f'./build/bin/geth -datadir '{nodeDataDir}' {cmd}')
+# 		return terminal(f'./build/bin/geth --datadir '{nodeDataDir}' {cmd}')
 def geth(cmd):
 	global gethCmdHeader
 	return terminal(f'{gethCmdHeader} {cmd}')
@@ -96,7 +97,7 @@ def geth_newwindow(cmd):
 # Returns address, keystorePath, or None if no address exists
 def getAccount(datadir):
 	try:
-		response = terminal(f'./build/bin/geth -datadir="{datadir}" account list')
+		response = terminal(f'./build/bin/geth --datadir="{datadir}" account list')
 		match = re.match(r'Account #0: \{([0-9a-fA-F]+)\} keystore://(.*)', response)
 		address = match.group(1)
 		keystorePath = match.group(2).strip()
@@ -117,7 +118,7 @@ def createLocalGethDirectory(datadir):
 		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
-		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
 		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
@@ -158,7 +159,7 @@ def createLocalGethDirectory(datadir):
 }''')
 	genesisFile.close()
 	print('Genesis written! Initializing...')
-	terminal(f'./build/bin/geth -datadir="{datadir}" init "{genesisPath}"')
+	terminal(f'./build/bin/geth --datadir="{datadir}" init "{genesisPath}"')
 
 
 def createInternetGethDirectory(datadir):
@@ -174,7 +175,7 @@ def createInternetGethDirectory(datadir):
 		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
-		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
 		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
@@ -185,7 +186,7 @@ def createInternetGethDirectory(datadir):
 		sys.exit()
 
 	print('Account address:', accountAddress)
-	terminal(f'./build/bin/geth -datadir="{datadir}" init')
+	terminal(f'./build/bin/geth --datadir="{datadir}" init')
 
 
 def main(argv):
@@ -263,7 +264,7 @@ def main(argv):
 				print(f'Creating directory "{datadir}"...')
 				createLocalGethDirectory(datadir)
 
-			gethCmdHeader += f' -datadir "{datadir}"'
+			gethCmdHeader += f' ---datadir "{datadir}"'
 
 
 	print('Starting console...')
