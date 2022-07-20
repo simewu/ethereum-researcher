@@ -19,6 +19,12 @@ import sys
 import time
 import webbrowser
 
+datadirDirectory = os.path.expanduser(os.path.join('~', 'Desktop'))
+
+# Scan for a "Blockchains" directory on linux systems, use it if it exists
+if os.path.exists(os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]):
+	datadirDirectory = os.path.join('.', 'media', os.getlogin(), 'Blockchains')[1:]
+
 
 # GETH COMMANDS:
 #	https://geth.ethereum.org/docs/interface/command-line-options
@@ -53,7 +59,7 @@ def terminal_newwindow(cmd):
 # 	if nodeDataDir == '':
 # 		return terminal(f'./build/bin/geth {cmd}')
 # 	else:
-# 		return terminal(f'./build/bin/geth -datadir '{nodeDataDir}' {cmd}')
+# 		return terminal(f'./build/bin/geth --datadir '{nodeDataDir}' {cmd}')
 def geth(cmd):
 	global gethCmdHeader
 	return terminal(f'{gethCmdHeader} {cmd}')
@@ -90,7 +96,7 @@ def geth_newwindow(cmd):
 # Returns address, keystorePath, or None if no address exists
 def getAccount(datadir):
 	try:
-		response = terminal(f'./build/bin/geth -datadir="{datadir}" account list')
+		response = terminal(f'./build/bin/geth --datadir="{datadir}" account list')
 		match = re.match(r'Account #0: \{([0-9a-fA-F]+)\} keystore://(.*)', response)
 		address = match.group(1)
 		keystorePath = match.group(2).strip()
@@ -111,7 +117,7 @@ def createLocalGethDirectory(datadir):
 		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
-		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
 		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
@@ -152,7 +158,7 @@ def createLocalGethDirectory(datadir):
 }''')
 	genesisFile.close()
 	print('Genesis written! Initializing...')
-	terminal(f'./build/bin/geth -datadir="{datadir}" init "{genesisPath}"')
+	terminal(f'./build/bin/geth --datadir="{datadir}" init "{genesisPath}"')
 
 
 def createInternetGethDirectory(datadir):
@@ -168,7 +174,7 @@ def createInternetGethDirectory(datadir):
 		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
-		terminal(f'./build/bin/geth -datadir="{datadir}" account new --password "{passwordPath}"')
+		terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
 		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
@@ -179,7 +185,7 @@ def createInternetGethDirectory(datadir):
 		sys.exit()
 
 	print('Account address:', accountAddress)
-	terminal(f'./build/bin/geth -datadir="{datadir}" init')
+	terminal(f'./build/bin/geth --datadir="{datadir}" init')
 
 
 def main(argv):
@@ -233,31 +239,42 @@ def main(argv):
 		if opt in ('-m', '--mainnet'):
 			gethCmdHeader += ' --syncmode "full"'
 			gethCmdHeader += ' --mainnet'
-			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'mainnet-geth-{portNumber}-node'))
+			datadir = os.path.expanduser(os.path.join(datadirDirectory, f'mainnet-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(datadir):
 				print('Creating datadir directory "datadir"...')
 				os.makedirs(datadir)
 				createInternetGethDirectory(datadir)
+
+			gethCmdHeader += f' --datadir "{datadir}"'
+			ipcPath = os.path.expanduser(os.path.join('~', 'Desktop', 'mainnet-geth-' + str(portNumber) + '-node-geth.ipc'))
+			gethCmdHeader += f' --ipcpath "{ipcPath}"'
 
 		elif opt in ('-r', '--ropsten'):
 			gethCmdHeader += ' --syncmode "light"'
 			gethCmdHeader += ' --ropsten'
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'ropsten-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(datadir):
 				print('Creating datadir directory "datadir"...')
 				os.makedirs(datadir)
 				createInternetGethDirectory(datadir)
+
+			gethCmdHeader += f' --datadir "{datadir}"'
+			ipcPath = os.path.expanduser(os.path.join('~', 'Desktop', 'ropsten-geth-' + str(portNumber) + '-node-geth.ipc'))
+			gethCmdHeader += f' --ipcpath "{ipcPath}"'
 		
 		elif opt in ('-l', '--local'):
 			datadir = os.path.expanduser(os.path.join('~', 'Desktop', f'local-geth-{portNumber}-node'))
+			print(f'datadir={datadir}')
 			passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 			if not os.path.exists(os.path.join(datadir, 'genesis.json')):
 				print(f'Creating directory "{datadir}"...')
 				createLocalGethDirectory(datadir)
 
-			gethCmdHeader += f' -datadir "{datadir}"'
+			gethCmdHeader += f' --datadir "{datadir}"'
 
 
 	print('Starting console...')
@@ -277,8 +294,8 @@ def main(argv):
 		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
 	
 	else: # Internet node (ropsten or mainnet)
-		geth_newwindow(f'--vmdebug console')
-		#geth(f'--vmdebug console')
+		#geth_newwindow(f'--vmdebug console')
+		geth(f'--vmdebug console')
 
 
 
