@@ -1,10 +1,18 @@
-echo "If this errors, type \"go version\" and make sure it's up-to-date"
-echo "If it is not up-to-date, type \"which go\" and \"rm -rf\" that path"
-echo "Then re-install, and append \"export PATH=\$PATH:/usr/local/go/bin\" to \"\$HOME/.profile\""
-
+command -v go version >/dev/null 2>&1 || {
+	echo ""
+	echo "Installing go..."
+	git clone https://github.com/canha/golang-tools-install-script.git
+	cd golang-tools-install-script/
+	./goinstall.sh
+	source ~/.bashrc
+	cd ..
+	rm -rf golang-tools-install-script
+}
 
 make all
 
-echo "\n\nCompilation finished, starting...\n"
+echo
+echo
+echo "Go Ethereum compilation finished, starting...\n"
 
 python3 run.py
