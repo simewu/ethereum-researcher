@@ -1,18 +1,18 @@
 // Copyright 2020 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// This file is part of go-ethereum.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
+// go-ethereum is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// go-ethereum is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-// GNU Lesser General Public License for more details.
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
 
 package t8ntool
 
@@ -56,6 +56,7 @@ type ExecutionResult struct {
 	Rejected    []*rejectedTx         `json:"rejected,omitempty"`
 	Difficulty  *math.HexOrDecimal256 `json:"currentDifficulty" gencodec:"required"`
 	GasUsed     math.HexOrDecimal64   `json:"gasUsed"`
+	BaseFee     *math.HexOrDecimal256 `json:"currentBaseFee,omitempty"`
 }
 
 type ommer struct {
@@ -63,12 +64,15 @@ type ommer struct {
 	Address common.Address `json:"address"`
 }
 
-//go:generate gencodec -type stEnv -field-override stEnvMarshaling -out gen_stenv.go
+//go:generate go run github.com/fjl/gencodec -type stEnv -field-override stEnvMarshaling -out gen_stenv.go
 type stEnv struct {
 	Coinbase         common.Address                      `json:"currentCoinbase"   gencodec:"required"`
 	Difficulty       *big.Int                            `json:"currentDifficulty"`
 	Random           *big.Int                            `json:"currentRandom"`
 	ParentDifficulty *big.Int                            `json:"parentDifficulty"`
+	ParentBaseFee    *big.Int                            `json:"parentBaseFee,omitempty"`
+	ParentGasUsed    uint64                              `json:"parentGasUsed,omitempty"`
+	ParentGasLimit   uint64                              `json:"parentGasLimit,omitempty"`
 	GasLimit         uint64                              `json:"currentGasLimit"   gencodec:"required"`
 	Number           uint64                              `json:"currentNumber"     gencodec:"required"`
 	Timestamp        uint64                              `json:"currentTimestamp"  gencodec:"required"`
@@ -84,6 +88,9 @@ type stEnvMarshaling struct {
 	Difficulty       *math.HexOrDecimal256
 	Random           *math.HexOrDecimal256
 	ParentDifficulty *math.HexOrDecimal256
+	ParentBaseFee    *math.HexOrDecimal256
+	ParentGasUsed    math.HexOrDecimal64
+	ParentGasLimit   math.HexOrDecimal64
 	GasLimit         math.HexOrDecimal64
 	Number           math.HexOrDecimal64
 	Timestamp        math.HexOrDecimal64
@@ -100,7 +107,6 @@ type rejectedTx struct {
 func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 	txs types.Transactions, miningReward int64,
 	getTracerFn func(txIndex int, txHash common.Hash) (tracer vm.EVMLogger, err error)) (*state.StateDB, *ExecutionResult, error) {
-
 	// Capture errors for BLOCKHASH operation, if we haven't been supplied the
 	// required blockhashes
 	var hashError error
@@ -167,7 +173,7 @@ func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 		}
 		vmConfig.Tracer = tracer
 		vmConfig.Debug = (tracer != nil)
-		statedb.Prepare(tx.Hash(), txIndex)
+		statedb.SetTxContext(tx.Hash(), txIndex)
 		txContext := core.NewEVMTxContext(msg)
 		snapshot := statedb.Snapshot()
 		evm := vm.NewEVM(vmContext, txContext, statedb, chainConfig, vmConfig)
@@ -224,8 +230,8 @@ func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 		txIndex++
 	}
 	statedb.IntermediateRoot(chainConfig.IsEIP158(vmContext.BlockNumber))
-	// Add mining reward?
-	if miningReward > 0 {
+	// Add mining reward? (-1 means rewards are disabled)
+	if miningReward >= 0 {
 		// Add mining reward. The mining reward may be `0`, which only makes a difference in the cases
 		// where
 		// - the coinbase suicided, or
@@ -241,7 +247,7 @@ func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 			minerReward.Add(minerReward, perOmmer)
 			// Add (8-delta)/8
 			reward := big.NewInt(8)
-			reward.Sub(reward, big.NewInt(0).SetUint64(ommer.Delta))
+			reward.Sub(reward, new(big.Int).SetUint64(ommer.Delta))
 			reward.Mul(reward, blockReward)
 			reward.Div(reward, big.NewInt(8))
 			statedb.AddBalance(ommer.Address, reward)
@@ -264,12 +270,13 @@ func (pre *Prestate) Apply(vmConfig vm.Config, chainConfig *params.ChainConfig,
 		Rejected:    rejectedTxs,
 		Difficulty:  (*math.HexOrDecimal256)(vmContext.Difficulty),
 		GasUsed:     (math.HexOrDecimal64)(gasUsed),
+		BaseFee:     (*math.HexOrDecimal256)(vmContext.BaseFee),
 	}
 	return statedb, execRs, nil
 }
 
 func MakePreState(db ethdb.Database, accounts core.GenesisAlloc) *state.StateDB {
-	sdb := state.NewDatabase(db)
+	sdb := state.NewDatabaseWithConfig(db, &trie.Config{Preimages: true})
 	statedb, _ := state.New(common.Hash{}, sdb, nil)
 	for addr, a := range accounts {
 		statedb.SetCode(addr, a.Code)
