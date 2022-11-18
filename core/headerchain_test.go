@@ -23,12 +23,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/consensus"
-	"github.com/simewu/ethereum-researcher/consensus/ethash"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/consensus"
+	"github.com/ethereum/go-ethereum/consensus/ethash"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 func verifyUnbrokenCanonchain(hc *HeaderChain) error {

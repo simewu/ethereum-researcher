@@ -24,14 +24,14 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common/mclock"
-	"github.com/simewu/ethereum-researcher/ethdb/memorydb"
-	"github.com/simewu/ethereum-researcher/les/vflux"
-	vfs "github.com/simewu/ethereum-researcher/les/vflux/server"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/p2p/enode"
-	"github.com/simewu/ethereum-researcher/p2p/enr"
-	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/ethereum/go-ethereum/common/mclock"
+	"github.com/ethereum/go-ethereum/ethdb/memorydb"
+	"github.com/ethereum/go-ethereum/les/vflux"
+	vfs "github.com/ethereum/go-ethereum/les/vflux/server"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/p2p/enode"
+	"github.com/ethereum/go-ethereum/p2p/enr"
+	"github.com/ethereum/go-ethereum/rlp"
 )
 
 var (

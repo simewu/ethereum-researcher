@@ -24,15 +24,15 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	"github.com/simewu/ethereum-researcher/core/beacon"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/eth"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/node"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/core/beacon"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/eth"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/node"
+	"github.com/ethereum/go-ethereum/rpc"
 )
 
 // Register adds catalyst APIs to the full node.

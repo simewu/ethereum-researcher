@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/p2p"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/ethereum/go-ethereum/rpc"
 )
 
 type gethrpc struct {

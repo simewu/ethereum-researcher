@@ -24,12 +24,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/event"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/event"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // ChainIndexerBackend defines the methods needed to process chain segments in

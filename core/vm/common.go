@@ -18,8 +18,8 @@ package vm
 
 import (
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/math"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/math"
 )
 
 // calcMemSize64 calculates the required memory size, and returns

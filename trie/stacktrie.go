@@ -25,9 +25,9 @@ import (
 	"io"
 	"sync"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 var ErrCommitDisabled = errors.New("no database for committing")

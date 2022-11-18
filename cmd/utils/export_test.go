@@ -23,8 +23,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/rlp"
 )
 
 // TestExport does basic sanity checks on the export/import functionality

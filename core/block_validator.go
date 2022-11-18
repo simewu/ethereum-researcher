@@ -19,11 +19,11 @@ package core
 import (
 	"fmt"
 
-	"github.com/simewu/ethereum-researcher/consensus"
-	"github.com/simewu/ethereum-researcher/core/state"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/params"
-	"github.com/simewu/ethereum-researcher/trie"
+	"github.com/ethereum/go-ethereum/consensus"
+	"github.com/ethereum/go-ethereum/core/state"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/params"
+	"github.com/ethereum/go-ethereum/trie"
 )
 
 // BlockValidator is responsible for validating block headers, uncles and

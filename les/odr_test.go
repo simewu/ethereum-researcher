@@ -26,17 +26,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/state"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/light"
-	"github.com/simewu/ethereum-researcher/params"
-	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/state"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/light"
+	"github.com/ethereum/go-ethereum/params"
+	"github.com/ethereum/go-ethereum/rlp"
 )
 
 type odrTestFn func(ctx context.Context, db ethdb.Database, config *params.ChainConfig, bc *core.BlockChain, lc *light.LightChain, bhash common.Hash) []byte

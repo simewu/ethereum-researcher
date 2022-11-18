@@ -22,13 +22,13 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	math2 "github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/consensus/ethash"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	math2 "github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/consensus/ethash"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 // alethGenesisSpec represents the genesis specification format used by the

@@ -20,7 +20,7 @@ import (
 	"math/big"
 
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/common"
+	"github.com/ethereum/go-ethereum/common"
 )
 
 // hashRange is a utility to handle ranges of hashes, Split up the

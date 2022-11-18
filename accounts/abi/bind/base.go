@@ -24,12 +24,12 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/simewu/ethereum-researcher"
-	"github.com/simewu/ethereum-researcher/accounts/abi"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/event"
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/event"
 )
 
 // SignerFn is a signer function callback when a contract requires a method to

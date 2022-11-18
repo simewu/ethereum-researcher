@@ -21,8 +21,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/math"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/math"
 )
 
 func TestBlockNumberJSONUnmarshal(t *testing.T) {

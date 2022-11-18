@@ -29,13 +29,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/consensus"
-	"github.com/simewu/ethereum-researcher/consensus/ethash"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/consensus"
+	"github.com/ethereum/go-ethereum/consensus/ethash"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 // snapshotTestBasic wraps the common testing fields in the snapshot tests.

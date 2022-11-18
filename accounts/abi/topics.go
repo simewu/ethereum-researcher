@@ -23,8 +23,8 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/crypto"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 // MakeTopics converts a filter query argument list into a filter topic set.

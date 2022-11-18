@@ -20,9 +20,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/cmd/devp2p/internal/v5test"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/p2p/discover"
+	"github.com/ethereum/go-ethereum/cmd/devp2p/internal/v5test"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/p2p/discover"
 	"gopkg.in/urfave/cli.v1"
 )
 

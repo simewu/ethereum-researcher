@@ -21,13 +21,13 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/core/state"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/trie"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/core/state"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/trie"
 )
 
 // StateAtBlock retrieves the state database associated with a certain block.

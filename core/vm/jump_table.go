@@ -19,7 +19,7 @@ package vm
 import (
 	"fmt"
 
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 type (

@@ -23,7 +23,7 @@ import (
 	"time"
 
 	"github.com/rjeczalik/notify"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 type watcher struct {

@@ -19,9 +19,9 @@ package core
 import (
 	"context"
 
-	"github.com/simewu/ethereum-researcher/internal/ethapi"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/internal/ethapi"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rpc"
 )
 
 type StdIOUI struct {

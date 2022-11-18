@@ -25,9 +25,9 @@ import (
 	"testing"
 
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 type TwoOperandTestcase struct {

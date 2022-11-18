@@ -25,11 +25,11 @@ import (
 	"time"
 
 	"github.com/olekukonko/tablewriter"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/ethdb/leveldb"
-	"github.com/simewu/ethereum-researcher/ethdb/memorydb"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/ethdb/leveldb"
+	"github.com/ethereum/go-ethereum/ethdb/memorydb"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // freezerdb is a database wrapper that enabled freezer data retrievals.

@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/simewu/ethereum-researcher"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/event"
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/event"
 	"golang.org/x/crypto/sha3"
 )
 

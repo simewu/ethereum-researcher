@@ -22,7 +22,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/light"
+	"github.com/ethereum/go-ethereum/light"
 )
 
 var (

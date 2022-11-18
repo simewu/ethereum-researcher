@@ -17,8 +17,8 @@
 package les
 
 import (
-	"github.com/simewu/ethereum-researcher/metrics"
-	"github.com/simewu/ethereum-researcher/p2p"
+	"github.com/ethereum/go-ethereum/metrics"
+	"github.com/ethereum/go-ethereum/p2p"
 )
 
 var (

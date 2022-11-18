@@ -27,7 +27,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 const (

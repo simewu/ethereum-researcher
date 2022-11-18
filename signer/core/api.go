@@ -25,17 +25,17 @@ import (
 	"os"
 	"reflect"
 
-	"github.com/simewu/ethereum-researcher/accounts"
-	"github.com/simewu/ethereum-researcher/accounts/keystore"
-	"github.com/simewu/ethereum-researcher/accounts/scwallet"
-	"github.com/simewu/ethereum-researcher/accounts/usbwallet"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	"github.com/simewu/ethereum-researcher/internal/ethapi"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rpc"
-	"github.com/simewu/ethereum-researcher/signer/core/apitypes"
-	"github.com/simewu/ethereum-researcher/signer/storage"
+	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/accounts/scwallet"
+	"github.com/ethereum/go-ethereum/accounts/usbwallet"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/internal/ethapi"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/ethereum/go-ethereum/signer/core/apitypes"
+	"github.com/ethereum/go-ethereum/signer/storage"
 )
 
 const (

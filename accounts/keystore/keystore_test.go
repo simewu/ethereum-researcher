@@ -28,10 +28,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/accounts"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/event"
+	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/event"
 )
 
 var testSigData = make([]byte, 32)

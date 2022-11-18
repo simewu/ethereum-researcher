@@ -21,9 +21,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/ethdb"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // Prove constructs a merkle proof for key. The result contains all encoded nodes

@@ -36,7 +36,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/go-bexpr"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // Handler is the global debugging handler.

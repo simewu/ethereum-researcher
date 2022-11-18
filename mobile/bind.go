@@ -22,11 +22,11 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/simewu/ethereum-researcher/accounts/abi"
-	"github.com/simewu/ethereum-researcher/accounts/abi/bind"
-	"github.com/simewu/ethereum-researcher/accounts/keystore"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/types"
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
 )
 
 // Signer is an interface defining the callback when a contract requires a

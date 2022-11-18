@@ -21,12 +21,12 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/simewu/ethereum-researcher/common"
-	cmath "github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	cmath "github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 var emptyCodeHash = crypto.Keccak256Hash(nil)

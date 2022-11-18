@@ -30,12 +30,12 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/simewu/ethereum-researcher/accounts"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	"github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/crypto"
+	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 var typedDataReferenceTypeRegexp = regexp.MustCompile(`^[A-Z](\w*)(\[\])?$`)
@@ -93,7 +93,7 @@ type SendTxArgs struct {
 
 	// We accept "data" and "input" for backwards-compatibility reasons.
 	// "input" is the newer name and should be preferred by clients.
-	// Issue detail: https://github.com/simewu/ethereum-researcher/issues/15628
+	// Issue detail: https://github.com/ethereum/go-ethereum/issues/15628
 	Data  *hexutil.Bytes `json:"data"`
 	Input *hexutil.Bytes `json:"input,omitempty"`
 

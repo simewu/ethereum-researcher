@@ -19,7 +19,7 @@ package utils
 import (
 	"fmt"
 
-	"github.com/simewu/ethereum-researcher/eth/ethconfig"
+	"github.com/ethereum/go-ethereum/eth/ethconfig"
 	"gopkg.in/urfave/cli.v1"
 )
 

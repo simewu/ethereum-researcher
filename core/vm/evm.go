@@ -24,9 +24,9 @@ import (
 	"time"
 
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 // emptyCodeHash is used by create to ensure deployment is disallowed to already

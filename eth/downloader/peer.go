@@ -25,11 +25,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/eth/protocols/eth"
-	"github.com/simewu/ethereum-researcher/event"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/p2p/msgrate"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/eth/protocols/eth"
+	"github.com/ethereum/go-ethereum/event"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/p2p/msgrate"
 )
 
 const (

@@ -19,9 +19,9 @@ package vm
 import (
 	"errors"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 func makeGasSStoreFunc(clearingRefund uint64) gasFunc {

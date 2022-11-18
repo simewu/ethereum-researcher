@@ -21,7 +21,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/simewu/ethereum-researcher/tests/fuzzers/les"
+	"github.com/ethereum/go-ethereum/tests/fuzzers/les"
 )
 
 func main() {

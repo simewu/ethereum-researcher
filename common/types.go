@@ -28,7 +28,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 	"golang.org/x/crypto/sha3"
 )
 

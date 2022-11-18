@@ -23,9 +23,9 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/p2p"
-	"github.com/simewu/ethereum-researcher/p2p/enode"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/ethereum/go-ethereum/p2p/enode"
 )
 
 // testPeer is a simulated peer to allow testing direct network calls.

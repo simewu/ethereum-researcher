@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/eth/protocols/eth"
-	"github.com/simewu/ethereum-researcher/p2p"
-	"github.com/simewu/ethereum-researcher/p2p/rlpx"
-	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/ethereum/go-ethereum/eth/protocols/eth"
+	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/ethereum/go-ethereum/p2p/rlpx"
+	"github.com/ethereum/go-ethereum/rlp"
 )
 
 type Message interface {

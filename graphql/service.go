@@ -21,8 +21,8 @@ import (
 	"net/http"
 
 	"github.com/graph-gophers/graphql-go"
-	"github.com/simewu/ethereum-researcher/internal/ethapi"
-	"github.com/simewu/ethereum-researcher/node"
+	"github.com/ethereum/go-ethereum/internal/ethapi"
+	"github.com/ethereum/go-ethereum/node"
 )
 
 type handler struct {

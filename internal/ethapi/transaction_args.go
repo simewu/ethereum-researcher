@@ -23,12 +23,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	"github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rpc"
 )
 
 // TransactionArgs represents the arguments to construct a new transaction
@@ -45,7 +45,7 @@ type TransactionArgs struct {
 
 	// We accept "data" and "input" for backwards-compatibility reasons.
 	// "input" is the newer name and should be preferred by clients.
-	// Issue detail: https://github.com/simewu/ethereum-researcher/issues/15628
+	// Issue detail: https://github.com/ethereum/go-ethereum/issues/15628
 	Data  *hexutil.Bytes `json:"data"`
 	Input *hexutil.Bytes `json:"input"`
 

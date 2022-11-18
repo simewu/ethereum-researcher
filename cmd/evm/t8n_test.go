@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/simewu/ethereum-researcher/cmd/evm/internal/t8ntool"
-	"github.com/simewu/ethereum-researcher/internal/cmdtest"
+	"github.com/ethereum/go-ethereum/cmd/evm/internal/t8ntool"
+	"github.com/ethereum/go-ethereum/internal/cmdtest"
 )
 
 func TestMain(m *testing.M) {

@@ -16,7 +16,7 @@
 
 package downloader
 
-import "github.com/simewu/ethereum-researcher/core/types"
+import "github.com/ethereum/go-ethereum/core/types"
 
 type DoneEvent struct {
 	Latest *types.Header

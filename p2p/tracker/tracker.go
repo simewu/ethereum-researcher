@@ -22,8 +22,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/metrics"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/metrics"
 )
 
 const (

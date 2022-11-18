@@ -21,7 +21,7 @@ import (
 	"sort"
 
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 var activators = map[int]func(*JumpTable){

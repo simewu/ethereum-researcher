@@ -24,8 +24,8 @@ import (
 	"sync"
 
 	"github.com/olekukonko/tablewriter"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // networkStats verifies the status of network components and generates a protip

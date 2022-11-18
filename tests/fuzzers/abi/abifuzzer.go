@@ -22,7 +22,7 @@ import (
 	"strings"
 
 	fuzz "github.com/google/gofuzz"
-	"github.com/simewu/ethereum-researcher/accounts/abi"
+	"github.com/ethereum/go-ethereum/accounts/abi"
 )
 
 var (

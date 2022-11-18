@@ -27,10 +27,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/node"
-	"github.com/simewu/ethereum-researcher/p2p/enode"
-	"github.com/simewu/ethereum-researcher/p2p/simulations/adapters"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/node"
+	"github.com/ethereum/go-ethereum/p2p/enode"
+	"github.com/ethereum/go-ethereum/p2p/simulations/adapters"
 )
 
 // Tests that a created snapshot with a minimal service only contains the expected connections

@@ -30,8 +30,8 @@ import (
 	"sync/atomic"
 
 	"github.com/rs/cors"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rpc"
 )
 
 // httpConfig is the JSON-RPC/HTTP configuration.

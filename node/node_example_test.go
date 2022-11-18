@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/simewu/ethereum-researcher/node"
+	"github.com/ethereum/go-ethereum/node"
 )
 
 // SampleLifecycle is a trivial network service that can be attached to a node for

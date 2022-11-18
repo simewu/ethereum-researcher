@@ -21,8 +21,8 @@ import (
 	"sync/atomic"
 
 	"github.com/golang/snappy"
-	"github.com/simewu/ethereum-researcher/common/math"
-	"github.com/simewu/ethereum-researcher/rlp"
+	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/rlp"
 )
 
 // This is the maximum amount of data that will be buffered in memory

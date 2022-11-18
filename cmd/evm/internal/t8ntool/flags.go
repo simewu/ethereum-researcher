@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/tests"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/tests"
 	"gopkg.in/urfave/cli.v1"
 )
 

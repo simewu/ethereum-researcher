@@ -19,11 +19,11 @@ package core
 import (
 	"sync/atomic"
 
-	"github.com/simewu/ethereum-researcher/consensus"
-	"github.com/simewu/ethereum-researcher/core/state"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/core/vm"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/consensus"
+	"github.com/ethereum/go-ethereum/core/state"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/core/vm"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 // statePrefetcher is a basic Prefetcher, which blindly executes a block on top

@@ -24,8 +24,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
 )
 
 // API describes the set of methods offered over the RPC interface

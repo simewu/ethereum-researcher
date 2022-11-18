@@ -21,8 +21,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/crypto"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/crypto"
 )
 
 // Tests that transactions can be added to strict lists and list contents and

@@ -22,11 +22,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common/mclock"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/p2p/enode"
-	"github.com/simewu/ethereum-researcher/p2p/enr"
-	"github.com/simewu/ethereum-researcher/p2p/nodestate"
+	"github.com/ethereum/go-ethereum/common/mclock"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/p2p/enode"
+	"github.com/ethereum/go-ethereum/p2p/enr"
+	"github.com/ethereum/go-ethereum/p2p/nodestate"
 )
 
 const defaultConnectedBias = time.Minute * 3

@@ -28,9 +28,9 @@ import (
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/gorilla/websocket"
-	"github.com/simewu/ethereum-researcher/internal/testlog"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rpc"
+	"github.com/ethereum/go-ethereum/internal/testlog"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/stretchr/testify/assert"
 )
 

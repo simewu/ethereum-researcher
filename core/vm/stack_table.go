@@ -17,7 +17,7 @@
 package vm
 
 import (
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/params"
 )
 
 func minSwapStack(n int) int {

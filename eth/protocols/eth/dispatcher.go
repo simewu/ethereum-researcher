@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/p2p"
+	"github.com/ethereum/go-ethereum/p2p"
 )
 
 var (

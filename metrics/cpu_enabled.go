@@ -21,7 +21,7 @@ package metrics
 
 import (
 	"github.com/shirou/gopsutil/cpu"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/log"
 )
 
 // ReadCPUStats retrieves the current CPU stats.

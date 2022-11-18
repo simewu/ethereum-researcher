@@ -19,8 +19,8 @@ package les
 import (
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common/bitutil"
-	"github.com/simewu/ethereum-researcher/light"
+	"github.com/ethereum/go-ethereum/common/bitutil"
+	"github.com/ethereum/go-ethereum/light"
 )
 
 const (

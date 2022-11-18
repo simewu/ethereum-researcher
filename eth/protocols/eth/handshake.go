@@ -21,9 +21,9 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/forkid"
-	"github.com/simewu/ethereum-researcher/p2p"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/forkid"
+	"github.com/ethereum/go-ethereum/p2p"
 )
 
 const (

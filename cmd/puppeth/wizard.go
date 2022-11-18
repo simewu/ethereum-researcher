@@ -31,10 +31,10 @@ import (
 	"sync"
 
 	"github.com/peterh/liner"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/console/prompt"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/console/prompt"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/log"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

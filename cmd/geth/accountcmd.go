@@ -20,11 +20,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/simewu/ethereum-researcher/accounts"
-	"github.com/simewu/ethereum-researcher/accounts/keystore"
-	"github.com/simewu/ethereum-researcher/cmd/utils"
-	"github.com/simewu/ethereum-researcher/crypto"
-	"github.com/simewu/ethereum-researcher/log"
+	"github.com/ethereum/go-ethereum/accounts"
+	"github.com/ethereum/go-ethereum/accounts/keystore"
+	"github.com/ethereum/go-ethereum/cmd/utils"
+	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/ethereum/go-ethereum/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

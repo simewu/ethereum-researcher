@@ -23,9 +23,9 @@ import (
 	"time"    // Cybersecurity Lab
 
 	"github.com/holiman/uint256"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/params"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/params"
 	"golang.org/x/crypto/sha3"
 )
 

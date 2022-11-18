@@ -37,7 +37,7 @@ package native
 import (
 	"errors"
 
-	"github.com/simewu/ethereum-researcher/eth/tracers"
+	"github.com/ethereum/go-ethereum/eth/tracers"
 )
 
 // init registers itself this packages as a lookup for tracers.

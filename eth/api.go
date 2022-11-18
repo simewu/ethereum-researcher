@@ -28,22 +28,22 @@ import (
 	"strings"
 	"time"
 
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/common/hexutil"
-	"github.com/simewu/ethereum-researcher/core"
-	"github.com/simewu/ethereum-researcher/core/rawdb"
-	"github.com/simewu/ethereum-researcher/core/state"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/internal/ethapi"
-	"github.com/simewu/ethereum-researcher/log"
-	"github.com/simewu/ethereum-researcher/rlp"
-	"github.com/simewu/ethereum-researcher/rpc"
-	"github.com/simewu/ethereum-researcher/trie"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"github.com/ethereum/go-ethereum/core"
+	"github.com/ethereum/go-ethereum/core/rawdb"
+	"github.com/ethereum/go-ethereum/core/state"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/internal/ethapi"
+	"github.com/ethereum/go-ethereum/log"
+	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/ethereum/go-ethereum/trie"
 
-	researcher "github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
-	//researcher "github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
+	researcher "github.com/ethereum/go-ethereum/core/vm" // Cybersecurity lab: Import VM interface
+	//researcher "github.com/ethereum/go-ethereum/core/vm" // Cybersecurity lab: Import VM interface
 	//researcher "../core/vm" // Cybersecurity lab: Import VM interface
-	//"github.com/simewu/ethereum-researcher/core/vm" // Cybersecurity lab: Import VM interface
+	//"github.com/ethereum/go-ethereum/core/vm" // Cybersecurity lab: Import VM interface
 )
 
 // PublicEthereumAPI provides an API to access Ethereum full node-related

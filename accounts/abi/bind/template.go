@@ -16,7 +16,7 @@
 
 package bind
 
-import "github.com/simewu/ethereum-researcher/accounts/abi"
+import "github.com/ethereum/go-ethereum/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -92,12 +92,12 @@ import (
 	"strings"
 	"errors"
 
-	ethereum "github.com/simewu/ethereum-researcher"
-	"github.com/simewu/ethereum-researcher/accounts/abi"
-	"github.com/simewu/ethereum-researcher/accounts/abi/bind"
-	"github.com/simewu/ethereum-researcher/common"
-	"github.com/simewu/ethereum-researcher/core/types"
-	"github.com/simewu/ethereum-researcher/event"
+	ethereum "github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
