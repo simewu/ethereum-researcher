@@ -22,6 +22,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/beacon"
 	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/ethereum/go-ethereum/miner"
 )
 
 // maxTrackedPayloads is the maximum number of prepared payloads the execution
@@ -38,7 +39,7 @@ const maxTrackedHeaders = 10
 // or evicted.
 type payloadQueueItem struct {
 	id      beacon.PayloadID
-	payload *beacon.ExecutableDataV1
+	payload *miner.Payload
 }
 
 // payloadQueue tracks the latest handful of constructed payloads to be retrieved
@@ -57,14 +58,14 @@ func newPayloadQueue() *payloadQueue {
 }
 
 // put inserts a new payload into the queue at the given id.
-func (q *payloadQueue) put(id beacon.PayloadID, data *beacon.ExecutableDataV1) {
+func (q *payloadQueue) put(id beacon.PayloadID, payload *miner.Payload) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
 	copy(q.payloads[1:], q.payloads)
 	q.payloads[0] = &payloadQueueItem{
 		id:      id,
-		payload: data,
+		payload: payload,
 	}
 }
 
@@ -78,10 +79,26 @@ func (q *payloadQueue) get(id beacon.PayloadID) *beacon.ExecutableDataV1 {
 			return nil // no more items
 		}
 		if item.id == id {
-			return item.payload
+			return item.payload.Resolve()
 		}
 	}
 	return nil
+}
+
+// has checks if a particular payload is already tracked.
+func (q *payloadQueue) has(id beacon.PayloadID) bool {
+	q.lock.RLock()
+	defer q.lock.RUnlock()
+
+	for _, item := range q.payloads {
+		if item == nil {
+			return false
+		}
+		if item.id == id {
+			return true
+		}
+	}
+	return false
 }
 
 // headerQueueItem represents an hash->header tuple to store until it's retrieved

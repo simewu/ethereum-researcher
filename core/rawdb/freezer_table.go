@@ -46,7 +46,7 @@ var (
 	errNotSupported = errors.New("this operation is not supported")
 )
 
-// indexEntry contains the number/id of the file that the data resides in, aswell as the
+// indexEntry contains the number/id of the file that the data resides in, as well as the
 // offset within the file to the end of the data.
 // In serialized form, the filenum is stored as uint16.
 type indexEntry struct {
@@ -119,12 +119,12 @@ type freezerTable struct {
 	writeMeter metrics.Meter // Meter for measuring the effective amount of data written
 	sizeGauge  metrics.Gauge // Gauge for tracking the combined size of all freezer tables
 
-	logger log.Logger   // Logger with database path and table name ambedded
+	logger log.Logger   // Logger with database path and table name embedded
 	lock   sync.RWMutex // Mutex protecting the data file descriptors
 }
 
-// NewFreezerTable opens the given path as a freezer table.
-func NewFreezerTable(path, name string, disableSnappy, readonly bool) (*freezerTable, error) {
+// newFreezerTable opens the given path as a freezer table.
+func newFreezerTable(path, name string, disableSnappy, readonly bool) (*freezerTable, error) {
 	return newTable(path, name, metrics.NilMeter{}, metrics.NilMeter{}, metrics.NilGauge{}, freezerTableSize, disableSnappy, readonly)
 }
 
@@ -148,20 +148,12 @@ func newTable(path string, name string, readMeter metrics.Meter, writeMeter metr
 		meta  *os.File
 	)
 	if readonly {
-		// Will fail if table doesn't exist
+		// Will fail if table index file or meta file is not existent
 		index, err = openFreezerFileForReadOnly(filepath.Join(path, idxName))
 		if err != nil {
 			return nil, err
 		}
-		// TODO(rjl493456442) change it to read-only mode. Open the metadata file
-		// in rw mode. It's a temporary solution for now and should be changed
-		// whenever the tail deletion is actually used. The reason for this hack is
-		// the additional meta file for each freezer table is added in order to support
-		// tail deletion, but for most legacy nodes this file is missing. This check
-		// will suddenly break lots of database relevant commands. So the metadata file
-		// is always opened for mutation and nothing else will be written except
-		// the initialization.
-		meta, err = openFreezerFileForAppend(filepath.Join(path, fmt.Sprintf("%s.meta", name)))
+		meta, err = openFreezerFileForReadOnly(filepath.Join(path, fmt.Sprintf("%s.meta", name)))
 		if err != nil {
 			return nil, err
 		}
@@ -884,9 +876,7 @@ func (t *freezerTable) Sync() error {
 	return t.head.Sync()
 }
 
-// DumpIndex is a debug print utility function, mainly for testing. It can also
-// be used to analyse a live freezer table index.
-func (t *freezerTable) DumpIndex(start, stop int64) {
+func (t *freezerTable) dumpIndexStdout(start, stop int64) {
 	t.dumpIndex(os.Stdout, start, stop)
 }
 

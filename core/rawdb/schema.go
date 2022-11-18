@@ -39,6 +39,9 @@ var (
 	// headFastBlockKey tracks the latest known incomplete block's hash during fast sync.
 	headFastBlockKey = []byte("LastFast")
 
+	// headFinalizedBlockKey tracks the latest known finalized block hash.
+	headFinalizedBlockKey = []byte("LastFinalized")
+
 	// lastPivotKey tracks the last pivot block used by fast sync (to reenable on sethead).
 	lastPivotKey = []byte("LastPivot")
 
@@ -102,38 +105,23 @@ var (
 	genesisPrefix  = []byte("ethereum-genesis-") // genesis state prefix for the db
 
 	// Chain index prefixes (use `i` + single byte to avoid mixing data types).
-	BloomBitsIndexPrefix = []byte("iB") // BloomBitsIndexPrefix is the data table of a chain indexer to track its progress
+
+	// BloomBitsIndexPrefix is the data table of a chain indexer to track its progress
+	BloomBitsIndexPrefix = []byte("iB")
+
+	ChtPrefix           = []byte("chtRootV2-") // ChtPrefix + chtNum (uint64 big endian) -> trie root hash
+	ChtTablePrefix      = []byte("cht-")
+	ChtIndexTablePrefix = []byte("chtIndexV2-")
+
+	BloomTriePrefix      = []byte("bltRoot-") // BloomTriePrefix + bloomTrieNum (uint64 big endian) -> trie root hash
+	BloomTrieTablePrefix = []byte("blt-")
+	BloomTrieIndexPrefix = []byte("bltIndex-")
+
+	CliqueSnapshotPrefix = []byte("clique-")
 
 	preimageCounter    = metrics.NewRegisteredCounter("db/preimage/total", nil)
 	preimageHitCounter = metrics.NewRegisteredCounter("db/preimage/hits", nil)
 )
-
-const (
-	// freezerHeaderTable indicates the name of the freezer header table.
-	freezerHeaderTable = "headers"
-
-	// freezerHashTable indicates the name of the freezer canonical hash table.
-	freezerHashTable = "hashes"
-
-	// freezerBodiesTable indicates the name of the freezer block body table.
-	freezerBodiesTable = "bodies"
-
-	// freezerReceiptTable indicates the name of the freezer receipts table.
-	freezerReceiptTable = "receipts"
-
-	// freezerDifficultyTable indicates the name of the freezer total difficulty table.
-	freezerDifficultyTable = "diffs"
-)
-
-// FreezerNoSnappy configures whether compression is disabled for the ancient-tables.
-// Hashes and difficulties don't compress well.
-var FreezerNoSnappy = map[string]bool{
-	freezerHeaderTable:     false,
-	freezerHashTable:       true,
-	freezerBodiesTable:     false,
-	freezerReceiptTable:    false,
-	freezerDifficultyTable: true,
-}
 
 // LegacyTxLookupEntry is the legacy TxLookupEntry definition with some unnecessary
 // fields.
@@ -244,7 +232,7 @@ func configKey(hash common.Hash) []byte {
 	return append(configPrefix, hash.Bytes()...)
 }
 
-// genesisKey = genesisPrefix + hash
-func genesisKey(hash common.Hash) []byte {
+// genesisStateSpecKey = genesisPrefix + hash
+func genesisStateSpecKey(hash common.Hash) []byte {
 	return append(genesisPrefix, hash.Bytes()...)
 }
