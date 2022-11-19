@@ -1,11 +1,3 @@
-const myArgs = process.argv.slice(2);
-if(myArgs.length != 2) {
-	console.error('Need two arguments, the ID, and the KEY.');
-	process.exit(1);
-}
-const argID = myArgs[0];
-const argKey = myArgs[1];
-
 const os = require("os");
 const fs = require('fs');
 //const solc = require('solc');
@@ -44,23 +36,18 @@ fs.readFile('contract.json', 'utf8', (error, data) => {
 			web3.eth.getGasPrice().then((averageGasPrice) => {
 				gasPrice = averageGasPrice;
 
-				contract.methods.storeKey(argID, argKey).estimateGas().then((estimatedGas) => {
+				contract.methods.hasWritePrivilege(account).estimateGas().then((estimatedGas) => {
 					gas = estimatedGas;
-
-					contract.methods.storeKey(argID, argKey).send({
+					contract.methods.hasWritePrivilege(account).call({
 						from: account,
 						gasPrice: gasPrice,
 						gas: gas
-					}).then((successful) => {
-						if(successful) {
-							console.log('Successfully stored', argKey, 'into ID', argID);
-							process.exit(0);
-						}
+					}).then((response) => {
+						console.log('Account', account)
+						console.log('Has write privilege:', response);
 					});
 				});
 			}).catch(console.error);
-
-
 
 
 		});

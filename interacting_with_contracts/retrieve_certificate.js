@@ -40,11 +40,21 @@ fs.readFile('contract.json', 'utf8', (error, data) => {
 				console.error(e);
 			}
 
-			contract.methods.retrieveKey(argID).call({
-				from: account
-			}).then((response) => {
-				console.log(response)
-			});
+			web3.eth.getGasPrice().then((averageGasPrice) => {
+				gasPrice = averageGasPrice;
+
+				contract.methods.retrieveKey(argID).estimateGas().then((estimatedGas) => {
+					gas = estimatedGas;
+					contract.methods.retrieveKey(argID).call({
+						from: account,
+						gasPrice: gasPrice,
+						gas: gas
+					}).then((response) => {
+						console.log(response)
+					});
+				});
+			}).catch(console.error);
+
 
 		});
 	});
