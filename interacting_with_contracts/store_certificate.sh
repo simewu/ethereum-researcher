@@ -1,0 +1,1 @@
+node store_certificate.js $1 $2

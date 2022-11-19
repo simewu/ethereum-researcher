@@ -1,0 +1,1 @@
+node retrieve_certificate.js $1
