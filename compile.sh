@@ -7,6 +7,9 @@ command -v go version >/dev/null 2>&1 || {
 	source ~/.bashrc
 	cd ..
 	rm -rf golang-tools-install-script
+	echo
+	echo "Please reboot, then re-run the script"
+	exit 1
 }
 
 make all

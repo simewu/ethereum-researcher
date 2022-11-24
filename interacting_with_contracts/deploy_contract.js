@@ -33,19 +33,31 @@ fs.readFile('contract.json', 'utf8', (err, data) => {
 			}
 
 			web3.eth.getGasPrice().then((averageGasPrice) => {
-				gasPrice = averageGasPrice;
-
 				contract.deploy().estimateGas().then((estimatedGas) => {
-					gas = estimatedGas;
+					// console.log('Account', account);
+					// console.log('Estimated Gas', estimatedGas);
+					// console.log('Average Gas Price', averageGasPrice);
 					contract.deploy().send({
 						from: account,
-						gasPrice: gasPrice,
-						gas: gas
+						gas: estimatedGas,
+						gasPrice: averageGasPrice
 					}).then((instance) => {
 						console.log('Contract deployed to:', instance.options.address);
 						process.exit(0);
 					});
+				}).catch(error => {
+					console.error(error);
+					// estimatedGas = 3141592000000
+					// contract.deploy().send({
+					// 	from: account,
+					// 	gas: estimatedGas,
+					// 	gasPrice: averageGasPrice
+					// }).then((instance) => {
+					// 	console.log('Contract deployed to:', instance.options.address);
+					// 	process.exit(0);
+					// });
 				});
+
 			}).catch(console.error);
 		}
 	});

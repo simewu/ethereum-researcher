@@ -50,12 +50,17 @@ fs.readFile('contract.json', 'utf8', (error, data) => {
 					contract.methods.storeKey(argID, argKey).send({
 						from: account,
 						gasPrice: gasPrice,
-						gas: gas
+						gas: gas + 100
 					}).then((successful) => {
 						if(successful) {
 							console.log('Successfully stored', argKey, 'into ID', argID);
 							process.exit(0);
+						} else {
+							console.log('Unsuccessful.')
 						}
+					}).catch(error => {
+						console.error('The gas estimation is likely off.')
+						console.error(error);
 					});
 				});
 			}).catch(console.error);

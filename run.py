@@ -19,6 +19,12 @@ import sys
 import time
 import webbrowser
 
+importSameAccount = True
+if importSameAccount:
+	# If using the mainnet, never store funds on this account!
+	importSameAccountPrivateKey = '827568872644599b3bfec00ae1519fa4c79b934abeb29ca06f73005079b8a385'
+	# Has address: 0x0000074148F6D8ee626940B0c9E803Dc1F1df550
+
 datadirDirectory = os.path.expanduser(os.path.join('~', 'Desktop'))
 
 # Scan for a "Blockchains" directory on linux systems, use it if it exists
@@ -117,7 +123,13 @@ def createLocalGethDirectory(datadir):
 		#passwordPath = os.path.expanduser(os.path.join(datadir, 'pass.txt'))
 		# Just make the default password "" for simplicity, security is not important for testing environments:
 		terminal(f'echo "" > {passwordPath}')
-		terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
+		if importSameAccount:
+			tempPrivateKeyPath = os.path.expanduser(os.path.join(datadir, 'temporary_file_delete_me.txt'))
+			terminal(f'echo "{importSameAccountPrivateKey}" > {tempPrivateKeyPath}')
+			terminal(f'./build/bin/geth --datadir="{datadir}" account import  --password "{passwordPath}" {tempPrivateKeyPath}')
+			terminal(f'rm -rf {tempPrivateKeyPath}')	
+		else:
+			terminal(f'./build/bin/geth --datadir="{datadir}" account new --password "{passwordPath}"')
 		#terminal(f'rm -rf {passwordPath}')
 		accountAddress, accountKeystorePath = getAccount(datadir)
 
@@ -131,24 +143,33 @@ def createLocalGethDirectory(datadir):
 
 	genesisPath = os.path.join(datadir, 'genesis.json')
 	genesisFile = open(genesisPath, 'w')
+	# "londonBlock": 0,
+	# "clique": {
+	#   "period": 5,
+	#   "epoch": 30000
+	# }
 	genesisFile.write('''{
 	"config": {
-		"chainID": 1234,
+		"chainId": 1234,
 		"homesteadBlock": 0,
-		"byzantiumBlock": 0,
-		"constantinopleBlock": 0,
 		"eip145Block": 0,
 		"eip150Block": 0,
 		"eip155Block": 0,
-		"eip158Block": 0
+		"eip158Block": 0,
+		"byzantiumBlock": 0,
+		"constantinopleBlock": 0,
+		"petersburgBlock": 0,
+		"istanbulBlock": 0,
+		"berlinBlock": 0,
+		"londonBlock": 0
 	},
 	"alloc": {
 		"0x''' + accountAddress + '''": {
 			"balance": "100000000000000000000000000000"
 		}
 	},
-	"difficulty": "0x400",
-	"gasLimit": "0x8000000",
+	"difficulty": "0x0",
+	"gasLimit": "31415920000000",
 	"nonce": "0x0000000000000000",
 	"coinbase": "0x0000000000000000000000000000000000000000",
 	"mixhash": "0x0000000000000000000000000000000000000000000000000000000000000000",
@@ -290,8 +311,8 @@ def main(argv):
 		if 'firefox' not in (p.name() for p in psutil.process_iter()):
 			webbrowser.open('https://remix.ethereum.org/#optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.7+commit.e28d00a7.js')
 
-		geth_newwindow(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
-		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --preload "javascript/mineWhenNeeded.js" console')
+		geth_newwindow(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --rpc.txfeecap 0 --preload "javascript/mineWhenNeeded.js" console')
+		#geth(f'--vmdebug --allow-insecure-unlock --unlock {accountAddress} --password="{passwordPath}" --rpc.txfeecap 0 --preload "javascript/mineWhenNeeded.js" console')
 	
 	else: # Internet node (ropsten or mainnet)
 		#geth_newwindow(f'--vmdebug console')
